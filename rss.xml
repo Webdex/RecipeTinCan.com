@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0">
+
+<channel>
+
+<title>Top 20 Recipes</title>
+<description>If it's a gadget, we review it. Learn what gadgets are hot and what's not! </description>
+<link>http://recipetincan.com </link>
+
+
+<?
+$result = mysql_query("SELECT * FROM recipes WHERE active = 1 ORDER BY rating DESC LIMIT 20");
+		$count = mysql_num_rows($result);
+		for($i=0; $i < $count; $i++ ) {
+			$row = mysql_fetch_array($result);
+			extract($row);
+			echo "<item>
+<title>$name</title>
+<description>$text </description>
+<link>http://recipetincan.com/recipepage.php?recipeid=$recipeid</link>
+</item>
+";
+}
+?>
+
+</channel>
+
+</rss>
